@@ -93,22 +93,30 @@ class FsTask:
         driver = self.spider.browser
         #默认跳转到第一个窗口
         window = driver.window_handles[window_num]
-        driver.switch_to_window(window)
-        action_chains = ActionChains(driver)
-        nav = driver.find_elements_by_css_selector("div.nav")
-        action_chains.move_to_element(nav[0]).perform()
+        try:
+            driver.switch_to_window(window)
+            action_chains = ActionChains(driver)
+            nav = driver.find_elements_by_css_selector("div.nav")
+            action_chains.move_to_element(nav[0]).perform()
+        except Exception as e:
+            print(e)
+            pass
         return window
 
     def moveMouseToElement(self, element = None, element_time = 3, dim_element = None, dim_time = 0.1):
-        driver = self.spider.browser
-        action_chains = ActionChains(driver)
-        if element:
-            action_chains.move_to_element(element).perform()
-            time.sleep(element_time)
-        # 在移动到指定元素,触发鼠标事件
-        if dim_element:
-            action_chains.move_to_element(dim_element).perform()
-            time.sleep(dim_time)
+        try:
+            driver = self.spider.browser
+            action_chains = ActionChains(driver)
+            if element:
+                action_chains.move_to_element(element).perform()
+                time.sleep(element_time)
+            # 在移动到指定元素,触发鼠标事件
+            if dim_element:
+                action_chains.move_to_element(dim_element).perform()
+                time.sleep(dim_time)
+        except Exception as e:
+            print(e)
+            pass
 
 
     def crawOnePage(self):
@@ -216,7 +224,7 @@ def main():
     WINDOW_SIZE = "1920,1080"
     DRIVER_PAHT = os.path.join(curdir, "data")
     executable_path = os.path.join(DRIVER_PAHT, 'chromedriver')
-    spider = FashionSpider(1, driver_path=executable_path, binary_location=binary_location, isBack=False)
+    spider = FashionSpider(1, driver_path=executable_path, binary_location=binary_location, isBack=True)
     task = FsTask(spider)
 
     url = "https://guang.taobao.com/ifashion/kan_list_page.htm?spm=a21ct.7779888.0.0.6e21ad92KhEMCx#!gender=2"
