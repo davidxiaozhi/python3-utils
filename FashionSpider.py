@@ -130,7 +130,7 @@ class FsTask:
                 self.moveMouseToElement(dim_element=img[0], dim_time=0)
                 img_src = img[0].get_attribute("src")
                 #print(img_src, end=" ")
-                self.saveImg(img_url=img_src)
+                #self.saveImg(img_url=img_src)
                 imgPaths = img_src.split("/")
 
                 tags = li.find_elements_by_css_selector("div.zw-links.clearfix a")
@@ -222,8 +222,8 @@ def main():
     curdir = os.path.dirname(os.path.realpath(__file__))
     binary_location = "/export/App/Google Chrome.app/Contents/MacOS/Google Chrome"
     WINDOW_SIZE = "1920,1080"
-    DRIVER_PAHT = os.path.join(curdir, "mac")
-    DRIVER_PAHT = os.path.join(DRIVER_PAHT, "data")
+    DRIVER_PAHT = os.path.join(curdir, "data")
+    DRIVER_PAHT = os.path.join(DRIVER_PAHT, "mac")
     executable_path = os.path.join(DRIVER_PAHT, 'chromedriver')
     spider = FashionSpider(1, driver_path=executable_path, binary_location=binary_location, isBack=True)
     task = FsTask(spider)
