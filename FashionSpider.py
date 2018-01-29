@@ -222,7 +222,8 @@ def main():
     curdir = os.path.dirname(os.path.realpath(__file__))
     binary_location = "/export/App/Google Chrome.app/Contents/MacOS/Google Chrome"
     WINDOW_SIZE = "1920,1080"
-    DRIVER_PAHT = os.path.join(curdir, "data")
+    DRIVER_PAHT = os.path.join(curdir, "mac")
+    DRIVER_PAHT = os.path.join(DRIVER_PAHT, "data")
     executable_path = os.path.join(DRIVER_PAHT, 'chromedriver')
     spider = FashionSpider(1, driver_path=executable_path, binary_location=binary_location, isBack=True)
     task = FsTask(spider)
