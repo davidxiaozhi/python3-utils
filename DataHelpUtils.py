@@ -68,6 +68,6 @@ def main():
     read_file(input_file, out_file, split_label=args.split_label)
 if __name__ == '__main__':
     #参数解析
-    #print(TOKENIZER_RE.findall("我的联系方式是:1383301998,我的 QQ 号码是:20111876997,我要买的鞋是 NB!!!"))
+    #print(TOKENIZER_RE.findall("我愛中華人名共和國我的联系方式是:1383301998,我的QQ号码是:20111876997,我要买的鞋是NB!!!（￣︶￣）↗"))
     main()
 
