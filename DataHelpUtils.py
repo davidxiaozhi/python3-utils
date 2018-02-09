@@ -5,11 +5,9 @@
 
 import os, argparse
 import re
-#TOKENIZER_RE = re.compile(r"[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Z]{2,}(?![a-z])|[A-Z][a-z]+(?=[A-Z])|[\'\w\-]+",
-#                         re.UNICODE)
-# TOKENIZER_RE = re.compile(r"[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{2,}|[\'\w\-]+",
-#                          re.UNICODE)
-split_re_str = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+'
+
+#split_re_str = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+'
+split_re_str = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+[.]{1}\d+|\d+'
 TOKENIZER_RE = re.compile(split_re_str)
 def tokenizer(iterator):
   """Tokenizer generator.
@@ -68,6 +66,8 @@ def main():
     read_file(input_file, out_file, split_label=args.split_label)
 if __name__ == '__main__':
     #参数解析
-    #print(TOKENIZER_RE.findall("我愛中華人名共和國我的联系方式是:1383301998,我的QQ号码是:20111876997,我要买的鞋是NB!!!（￣︶￣）↗"))
+    # split_re_str_test = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+[.]\d+|\d+'
+    # TOKENIZER_RE_test = re.compile(split_re_str_test)
+    # print(TOKENIZER_RE_test.findall("我愛中華人名共和國,衣服12.291456我的联系方式是:1383301998,我的QQ号码是:20111876997,我要买的鞋是NB!!!（￣︶￣）↗"))
     main()
 

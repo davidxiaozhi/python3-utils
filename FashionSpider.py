@@ -170,7 +170,8 @@ class FsTask:
             nextPage = driver.find_elements_by_css_selector("a.J_Ajax.next")
             span = driver.find_elements_by_css_selector("span.next.next-disabled")
             action_chains = ActionChains(driver)
-            self.moveMouseToElement(nextPage[0])
+            if len(nextPage) == 1:
+                self.moveMouseToElement(nextPage[0])
         # a.J_Ajax.next
         # data-value
         # span.next.next-disabled
