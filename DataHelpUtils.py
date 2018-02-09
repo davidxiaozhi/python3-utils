@@ -6,6 +6,7 @@
 import os, argparse
 import re
 
+version="0.002"
 #split_re_str = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+'
 split_re_str = u'[\u4e00-\u9fa5]|[，．？：；！,.?:;!]+|[A-Za-z]{1,}|[\'\-]+|\d+[.]{1}\d+|\d+'
 TOKENIZER_RE = re.compile(split_re_str)
@@ -38,13 +39,15 @@ def read_file(input_file, out_file, split_label=",,", split_text=" ", batch_size
     print("总共处理{}行文本,格式不符合规范的{}行".format(total_line, error_line))
 
 def main():
-    parser = argparse.ArgumentParser(description='Fasttext 输入样本预处理')
+    parser = argparse.ArgumentParser(description='Fasttext 输入样本预处理脚本,当前版本为:'+version)
     parser.add_argument('--input_file', type=str, required=True, help=' 预处理文本的全路径')
     parser.add_argument('--output_file', type=str, default='', help='处理后文件输出目录')
     #parser.add_argument('--out_dir', type=str, default='data_path', help='处理后文件输出目录')
     parser.add_argument('--split_label', type=str, default=',,', help='label 与文本之前的分隔符')
+    parser.add_argument('--version', type=str, default=version, help='预处理脚本对应脚本版本号,此参数不用指定,当前版本为:'+version)
     args = parser.parse_args()
     input_file = args.input_file
+    print("Fasttext 输入样本预处理脚本,当前版本为:{} ".format(version))
     out_file = ""
     file_name = os.path.basename(input_file)
     if not os.path.exists(input_file):
