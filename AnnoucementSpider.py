@@ -100,14 +100,16 @@ class FsTask:
             pass
 
 
-    def crawOneType(self, items, type):
+    def crawOneType(self, items, context_map, type):
         time.sleep(3)
         driver = self.spider.browser
         dataList=[]
         for index_li, li in enumerate(items):
             try:
-                text = li.text()
-                print("第 {} 个,内容为:{}".format(index_li, li))
+                #text = li.text()
+                if context_map.get(li.text,"None") == "None":
+                    print("{} 第 {} 个,内容为:{}".format(type, index_li, li.text))
+                    dataList.append(li.text)
             except Exception as e:
                 print(e)
                 pass
@@ -117,6 +119,7 @@ class FsTask:
 
 
     def openNewPage(self, url):
+        context_map = {}
         driver = self.spider.browser
         driver.get(url)
         time.sleep(10)
@@ -127,7 +130,11 @@ class FsTask:
         sections = driver.find_elements_by_css_selector("section.section")
         # 0 发币上线 1 最新公告
         type_0 = sections[0].find_elements_by_css_selector("li.article-list-item")
-        self.crawOneType(type_0, type=0)
+        type_1 = sections[1].find_elements_by_css_selector("li.article-list-item")
+        fabiList =self.crawOneType(type_0, context_map, type="发币上线")
+        annoucList = self.crawOneType(type_1, context_map, type="最新公告")
+
+
 
 
 
